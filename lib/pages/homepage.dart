@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  openCameraFunction() {
+
+  }
+
+  openGalleryFunction() {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,14 +27,14 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 12,
             ),
             RaisedButton(
-              onPressed: () {},
+              onPressed: openCameraFunction,
               child: Text("Open Camera"),
             ),
             SizedBox(
               height: 12,
             ),
             RaisedButton(
-              onPressed: () {},
+              onPressed: openGalleryFunction,
               child: Text("Open Gallery"),
             ),
           ],
