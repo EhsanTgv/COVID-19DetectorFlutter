@@ -1,12 +1,19 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
 
 import 'pages/homepage.dart';
 
-void main() {
+Future<void> main() async {
 //  debugPaintSizeEnabled = true;
 //  debugPaintBaselinesEnabled = true;
 //  debugPaintPointersEnabled = true;
+  WidgetsFlutterBinding.ensureInitialized();
+  final cameras = await availableCameras();
+  final firstCamera = cameras.first;
+
   runApp(MyApp());
 }
 
