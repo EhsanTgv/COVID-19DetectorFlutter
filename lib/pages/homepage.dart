@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:path/path.dart' show join;
+import 'package:path_provider/path_provider.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -7,13 +9,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  openCameraFunction() {
+  openCameraFunction() {}
 
-  }
-
-  openGalleryFunction() {
-
-  }
+  openGalleryFunction() {}
 
   @override
   Widget build(BuildContext context) {
@@ -21,26 +19,38 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("COVID-19 Detector"),
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            SizedBox(
-              height: 12,
-            ),
-            RaisedButton(
-              onPressed: openCameraFunction,
-              child: Text("Open Camera"),
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            RaisedButton(
-              onPressed: openGalleryFunction,
-              child: Text("Open Gallery"),
-            ),
-          ],
-        ),
+      body: FutureBuilder<void>(
+        future: _initializeControllerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            // If the Future is complete, display the preview.
+            return CameraPreview(_controller);
+          } else {
+            // Otherwise, display a loading indicator.
+            return Center(child: CircularProgressIndicator());
+          }
+        },
       ),
+//      Center(
+//        child: Column(
+//          children: <Widget>[
+//            SizedBox(
+//              height: 12,
+//            ),
+//            RaisedButton(
+//              onPressed: openCameraFunction,
+//              child: Text("Open Camera"),
+//            ),
+//            SizedBox(
+//              height: 12,
+//            ),
+//            RaisedButton(
+//              onPressed: openGalleryFunction,
+//              child: Text("Open Gallery"),
+//            ),
+//          ],
+//        ),
+//      ),
     );
   }
 }
