@@ -1,8 +1,8 @@
 import 'dart:async';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
 
 import 'pages/homepage.dart';
 import 'pages/take_picture_screen.dart';
@@ -42,6 +42,11 @@ class MyApp extends StatelessWidget {
                   TakePictureScreen(camera: camera));
         }
         return null;
+      },
+      onUnknownRoute: (RouteSettings settings) {
+        return MaterialPageRoute(
+          builder: (BuildContext context) => MyHomePage(),
+        );
       },
     );
   }
