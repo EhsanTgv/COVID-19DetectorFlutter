@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
 import 'pages/homepage.dart';
+import 'pages/take_picture_screen.dart';
 
 Future<void> main() async {
 //  debugPaintSizeEnabled = true;
@@ -14,10 +15,14 @@ Future<void> main() async {
   final cameras = await availableCameras();
   final firstCamera = cameras.first;
 
-  runApp(MyApp());
+  runApp(MyApp(firstCamera));
 }
 
 class MyApp extends StatelessWidget {
+  final CameraDescription camera;
+
+  MyApp(this.camera);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,6 +34,15 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.lightBlueAccent,
       ),
       routes: {"/": (BuildContext context) => MyHomePage()},
+      onGenerateRoute: (RouteSettings settings) {
+        final List<String> pathElements = settings.name.split('/');
+        if (pathElements[1] == "camera") {
+          return MaterialPageRoute<bool>(
+              builder: (BuildContext context) =>
+                  TakePictureScreen(camera: camera));
+        }
+        return null;
+      },
     );
   }
 }
