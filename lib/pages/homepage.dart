@@ -8,7 +8,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  openCameraFunction() {}
+  openCameraFunction() {
+    Navigator.pushNamed<bool>(context, "/camera");
+  }
 
   openGalleryFunction() {}
 
