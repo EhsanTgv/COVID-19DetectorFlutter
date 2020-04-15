@@ -24,7 +24,9 @@ class DisplayPictureScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.check),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }

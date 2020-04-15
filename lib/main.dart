@@ -33,7 +33,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
         accentColor: Colors.lightBlueAccent,
       ),
-      routes: {"/": (BuildContext context) => MyHomePage()},
+      routes: {
+        "/": (BuildContext context) => MyHomePage(),
+      },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
         if (pathElements[1] == "camera") {
