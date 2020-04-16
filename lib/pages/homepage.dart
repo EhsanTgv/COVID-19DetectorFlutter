@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -8,11 +11,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  File _image;
+
   openCameraFunction() {
     Navigator.pushNamed<bool>(context, "/camera");
   }
 
-  openGalleryFunction() {}
+  Future openGalleryFunction() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = image;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
