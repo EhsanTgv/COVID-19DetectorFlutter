@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
     var request = http.MultipartRequest('POST', Uri.parse(url));
     request.files.add(await http.MultipartFile.fromPath('file', filename));
     var res = await request.send();
-    return res.reasonPhrase;
+    return res.stream.bytesToString();
   }
 
   @override
