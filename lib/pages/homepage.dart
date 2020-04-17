@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String parseData(String response) {
     try{
-      Map<String, dynamic> jsonResponse = json.decode(json.encode(response));
+      Map<String, dynamic> jsonResponse = json.decode(response);
       if (jsonResponse['predict'] != null) {
         return jsonResponse['predict'];
       } else {
