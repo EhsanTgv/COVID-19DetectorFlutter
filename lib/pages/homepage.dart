@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -24,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
         await uploadImage(image.path, "http://chichiapp.ir:8838/upload/x-ray");
 
     setState(() {
-      response = _response;
+      response = parseData(_response);
     });
   }
 
@@ -33,6 +34,15 @@ class _MyHomePageState extends State<MyHomePage> {
     request.files.add(await http.MultipartFile.fromPath('file', filename));
     var res = await request.send();
     return res.stream.bytesToString();
+  }
+
+  String parseData(String response) {
+    Map<String, dynamic> jsonResponse = json.decode(json.encode(response));
+    if (jsonResponse['predict'] != null) {
+      return jsonResponse['predict'];
+    } else {
+      return "error parsing";
+    }
   }
 
   @override
