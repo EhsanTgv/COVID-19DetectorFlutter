@@ -13,7 +13,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String response = "request not sended";
+  String state = "request not sended";
 
   openCameraFunction() {
     Navigator.pushNamed<bool>(context, "/camera");
@@ -21,11 +21,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future openGalleryFunction() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      state = "waiting...";
+    });
+
     var _response =
         await uploadImage(image.path, "http://chichiapp.ir:8838/upload/x-ray");
 
     setState(() {
-      response = parseData(_response);
+      state = parseData(_response);
     });
   }
 
@@ -76,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 12,
             ),
-            Text(response)
+            Text(state)
           ],
         ),
       ),
