@@ -7,6 +7,10 @@ import 'package:http/http.dart' as http;
 import 'package:progress_dialog/progress_dialog.dart';
 
 class MyHomePage extends StatefulWidget {
+  File cameraImage;
+
+  MyHomePage({this.cameraImage});
+
   @override
   State<StatefulWidget> createState() {
     return _MyHomePageState();
