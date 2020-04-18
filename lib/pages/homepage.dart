@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       state = parseData(_response);
-      progressDialog.hide();
+      await progressDialog.hide();
     });
   }
 
@@ -42,13 +42,14 @@ class _MyHomePageState extends State<MyHomePage> {
     var request = http.MultipartRequest('POST', Uri.parse(url));
     request.files.add(await http.MultipartFile.fromPath('file', filename));
     var res = await request.send();
-     return res.stream.bytesToString();
+    return res.stream.bytesToString();
   }
 
   String parseData(String response) {
     try {
       Map<String, dynamic> jsonResponse = json.decode(response);
       if (jsonResponse['predict'] != null) {
+        responseDialog(jsonResponse['predict']);
         return jsonResponse['predict'];
       } else {
         return "error parsing";
@@ -58,29 +59,20 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Future<void> _neverSatisfied() async {
+  Future<void> responseDialog(response) async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Rewind and remember'),
+          title: Text('server response'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('You will never be satisfied.'),
-                Text('You\’re like me. I’m never satisfied.'),
+                Text('predict: $response'),
               ],
             ),
           ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('Regret'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
         );
       },
     );
