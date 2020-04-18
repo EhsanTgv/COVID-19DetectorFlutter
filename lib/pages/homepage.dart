@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
     var request = http.MultipartRequest('POST', Uri.parse(url));
     request.files.add(await http.MultipartFile.fromPath('file', filename));
     var res = await request.send();
-    return res.stream.bytesToString();
+    return res.stream.bytesToString().timeout(const Duration(seconds: 1));
   }
 
   String parseData(String response) {
