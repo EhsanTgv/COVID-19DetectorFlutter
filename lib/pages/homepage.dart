@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:progress_dialog/progress_dialog.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  ProgressDialog progressDialog;
   String state = "request not sended";
 
   openCameraFunction() {
@@ -24,6 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       state = "waiting...";
+      progressDialog.show();
     });
 
     var _response =
@@ -31,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       state = parseData(_response);
+      progressDialog.hide();
     });
   }
 
@@ -42,21 +46,23 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   String parseData(String response) {
-    try{
+    try {
       Map<String, dynamic> jsonResponse = json.decode(response);
       if (jsonResponse['predict'] != null) {
         return jsonResponse['predict'];
       } else {
         return "error parsing";
       }
-    }catch (e){
+    } catch (e) {
       return "error parsing";
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
+    progressDialog = ProgressDialog(context,
+        type: ProgressDialogType.Normal, isDismissible: false);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("COVID-19 Detector"),
