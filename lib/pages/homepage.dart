@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       state = parseData(_response);
-      await progressDialog.hide();
+      progressDialog.hide();
     });
   }
 
