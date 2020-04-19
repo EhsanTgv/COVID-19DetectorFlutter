@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 
-import 'display_picture_screen.dart';
+import 'homepage.dart';
 
 class TakePictureScreen extends StatefulWidget {
   final CameraDescription camera;
@@ -91,7 +91,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => DisplayPictureScreen(imagePath: path),
+                builder: (context) => MyHomePage(cameraImagePath: path),
               ),
             );
           } catch (e) {
