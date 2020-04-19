@@ -22,7 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String state = "request not sended";
 
   openCameraFunction() {
-    Navigator.pushNamed<bool>(context, "/camera");
+    Navigator.pushReplacementNamed(context, "/camera");
   }
 
   Future openGalleryFunction() async {

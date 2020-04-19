@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.lightBlueAccent,
       ),
       routes: {
-        "/": (BuildContext context) => MyHomePage(),
+        "/": (BuildContext context) => MyHomePage(cameraImagePath: null),
       },
       onGenerateRoute: (RouteSettings settings) {
         final List<String> pathElements = settings.name.split('/');
