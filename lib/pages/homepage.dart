@@ -37,8 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
         await uploadImage(image.path, "http://chichiapp.ir:8838/upload/x-ray");
 
     setState(() {
-      state = parseData(_response);
-      progressDialog.hide();
+      progressDialog.hide().whenComplete((){
+        state = parseData(_response);
+      });
     });
   }
 
