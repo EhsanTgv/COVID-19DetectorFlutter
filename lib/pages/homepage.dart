@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
         await uploadImage(image.path, "http://chichiapp.ir:8838/upload/x-ray");
 
     setState(() {
-      progressDialog.hide().whenComplete((){
+      progressDialog.hide().whenComplete(() {
         state = parseData(_response);
       });
     });
@@ -109,10 +109,6 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: openGalleryFunction,
               child: Text("Open Gallery"),
             ),
-            SizedBox(
-              height: 12,
-            ),
-            Text(state)
           ],
         ),
       ),
