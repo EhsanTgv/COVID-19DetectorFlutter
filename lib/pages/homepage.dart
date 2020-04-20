@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:camera/camera.dart';
 
+import 'take_picture_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   final CameraDescription camera;
@@ -30,7 +31,11 @@ class _MyHomePageState extends State<MyHomePage> {
   String state = "request not sended";
 
   openCameraFunction() {
-    Navigator.pushReplacementNamed(context, "/camera");
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => TakePictureScreen(camera: camera)),
+    );
   }
 
   Future openGalleryFunction() async {
