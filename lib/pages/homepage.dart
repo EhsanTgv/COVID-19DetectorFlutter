@@ -30,12 +30,28 @@ class _MyHomePageState extends State<MyHomePage> {
   ProgressDialog progressDialog;
   String state = "request not sended";
 
-  openCameraFunction() {
-    Navigator.push(
+  openCameraFunction() async {
+    final result = await Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => TakePictureScreen(camera: camera)),
     );
+
+    if (result != null) {
+      setState(() {
+        state = "waiting...";
+        progressDialog.show();
+      });
+
+      var _response =
+          await uploadImage(result, "http://chichiapp.ir:8838/upload/x-ray");
+
+      setState(() {
+        progressDialog.hide().whenComplete(() {
+          state = parseData(_response);
+        });
+      });
+    }
   }
 
   Future openGalleryFunction() async {
