@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/homepage.dart';
-import 'pages/take_picture_screen.dart';
 
 Future<void> main() async {
 //  debugPaintSizeEnabled = true;
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
         accentColor: Colors.lightBlueAccent,
       ),
-      home: MyHomePage(),
+      home: MyHomePage(camera),
     );
   }
 }

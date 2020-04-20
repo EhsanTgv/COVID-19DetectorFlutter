@@ -5,19 +5,27 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:progress_dialog/progress_dialog.dart';
+import 'package:camera/camera.dart';
+
 
 class MyHomePage extends StatefulWidget {
-  String cameraImagePath;
+  final CameraDescription camera;
 
-  MyHomePage({this.cameraImagePath});
+  MyHomePage(this.camera);
+
+  String cameraImagePath;
 
   @override
   State<StatefulWidget> createState() {
-    return _MyHomePageState();
+    return _MyHomePageState(camera);
   }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final CameraDescription camera;
+
+  _MyHomePageState(this.camera);
+
   ProgressDialog progressDialog;
   String state = "request not sended";
 
