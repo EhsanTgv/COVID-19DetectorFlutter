@@ -33,23 +33,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
         accentColor: Colors.lightBlueAccent,
       ),
-      routes: {
-        "/": (BuildContext context) => MyHomePage(cameraImagePath: null),
-      },
-      onGenerateRoute: (RouteSettings settings) {
-        final List<String> pathElements = settings.name.split('/');
-        if (pathElements[1] == "camera") {
-          return MaterialPageRoute<bool>(
-              builder: (BuildContext context) =>
-                  TakePictureScreen(camera: camera));
-        }
-        return null;
-      },
-      onUnknownRoute: (RouteSettings settings) {
-        return MaterialPageRoute(
-          builder: (BuildContext context) => MyHomePage(),
-        );
-      },
+      home: MyHomePage(),
     );
   }
 }
