@@ -114,6 +114,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("COVID-19 Detector"),
+        actions: <Widget>[
+          IconButton(
+            color: Colors.white,
+            onPressed: () {},
+            icon: Icon(Icons.info_outline),
+          )
+        ],
       ),
       body: Center(
         child: Column(
