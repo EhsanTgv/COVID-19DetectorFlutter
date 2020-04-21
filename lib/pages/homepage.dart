@@ -93,11 +93,11 @@ class _MyHomePageState extends State<MyHomePage> {
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('server response'),
+          title: Text("server response"),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text('predict: $response'),
+                Text("predict: $response"),
               ],
             ),
           ),
@@ -117,7 +117,25 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           IconButton(
             color: Colors.white,
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("About"),
+                      content: SingleChildScrollView(
+                        child: ListBody(
+                          children: <Widget>[
+                            Text("Instructions:\n" +
+                                "1. select your x ray photo from camera or gallery for prediction\n" +
+                                "2. wait for server's response")
+                          ],
+                        ),
+                      ),
+                    );
+                  });
+            },
             icon: Icon(Icons.info_outline),
           )
         ],
