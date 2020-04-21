@@ -38,40 +38,32 @@ class _MyHomePageState extends State<MyHomePage> {
     );
 
     if (result != null) {
-      setState(() {
-        state = "waiting...";
-        progressDialog.show();
-      });
-
-      var _response =
-          await uploadImage(result, "http://chichiapp.ir:8838/upload/x-ray");
-
-      setState(() {
-        progressDialog.hide().whenComplete(() {
-          state = parseData(_response);
-        });
-      });
+      prepareConnection(result);
     }
   }
 
-  Future openGalleryFunction() async {
+  openGalleryFunction() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
-      setState(() {
-        state = "waiting...";
-        progressDialog.show();
-      });
-
-      var _response = await uploadImage(
-          image.path, "http://chichiapp.ir:8838/upload/x-ray");
-
-      setState(() {
-        progressDialog.hide().whenComplete(() {
-          state = parseData(_response);
-        });
-      });
+      prepareConnection(image.path);
     }
+  }
+
+  prepareConnection(imagePath) async {
+    setState(() {
+      state = "waiting...";
+      progressDialog.show();
+    });
+
+    var _response =
+        await uploadImage(imagePath, "http://chichiapp.ir:8838/upload/x-ray");
+
+    setState(() {
+      progressDialog.hide().whenComplete(() {
+        state = parseData(_response);
+      });
+    });
   }
 
   Future<String> uploadImage(filename, url) async {
